@@ -1,12 +1,12 @@
 # app.py
 
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    # Código que se mostrará en la web
     code = '''
     ```python
     from flask import Flask
@@ -21,7 +21,6 @@ def hello_world():
         app.run(host="0.0.0.0", port=5000)
     ```
     '''
-    # HTML para la página
     html_content = f"""
     <html>
         <body style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
@@ -34,4 +33,5 @@ def hello_world():
     return html_content
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
